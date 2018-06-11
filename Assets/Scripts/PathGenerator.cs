@@ -43,7 +43,6 @@ public class PathGenerator : MonoBehaviour
         }
         Instantiate(SpawnPoint, spawnPoint, Quaternion.identity).transform.parent = parentObject;
         Instantiate(DestPoint, destPoint, Quaternion.identity).transform.parent = parentObject;
-        Instantiate(Turret, new Vector3(spawnPoint.x+4, PathTiles[0].y, spawnPoint.z - 3), Quaternion.identity);
     }
 
     private void CreatePath()
