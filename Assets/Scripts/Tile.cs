@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Tile : MonoBehaviour {
 
@@ -12,14 +13,23 @@ public class Tile : MonoBehaviour {
     private GameObject turret;
     public Vector3 positionOffset;
 
+    BuildManager buildManager;
+
     void Start()
     {
         rend = GetComponent<Renderer>();
         originalColor = rend.material.color;
+        buildManager = BuildManager.instance;
     }
 
     void OnMouseEnter()
     {
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
+
+        if (buildManager.GetTurretToBuild() == null)
+            return;
+
         if (turret == null)
         {
             rend.material.color = hoverColor;
@@ -38,9 +48,12 @@ public class Tile : MonoBehaviour {
 
     void OnMouseDown()
     {
+        if (buildManager.GetTurretToBuild() == null)
+            return;
+
         if (turret == null)
         {
-            GameObject turretToBuild = BuildManager.instance.GetTurretToBuild();
+            GameObject turretToBuild = buildManager.GetTurretToBuild();
             turret = (GameObject)Instantiate(turretToBuild, transform.position + positionOffset, transform.rotation);
             rend.material.color = unallowed;
         }
