@@ -7,7 +7,7 @@ public class EnemyMovement : MonoBehaviour {
     public float speed = 10f;
 
     private Vector3 target;
-    private int PathTilesIterator = 0;
+    private int counter = 0;
 
     void Start()
     {
@@ -27,12 +27,12 @@ public class EnemyMovement : MonoBehaviour {
 
     void getNextTarget()
     {
-        if (PathTilesIterator >= PathGenerator.PathTiles.Count - 1)
+        if (counter >= PathGenerator.PathTiles.Count - 1)
         {
             Destroy(gameObject);
             return;
         }
-        PathTilesIterator++;
-        target = PathGenerator.PathTiles[PathTilesIterator];
+        counter++;
+        target = PathGenerator.PathTiles[counter];
     }
 }
