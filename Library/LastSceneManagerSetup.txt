@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/test.unity
+- path: C:/Users/diana.drumea/Desktop/Licenta---Tower-Defense-master/Assets/test.unity
   isLoaded: 1
   isActive: 1
