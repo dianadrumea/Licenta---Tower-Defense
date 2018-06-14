@@ -7,11 +7,13 @@ public class Tile : MonoBehaviour {
 
     public Color hoverColor;
     public Color unallowed;
+    public Vector3 positionOffset;
+
+    [Header("Optional")]
+    public GameObject turret;
+
     private Color originalColor;
     private Renderer rend;
-
-    private GameObject turret;
-    public Vector3 positionOffset;
 
     BuildManager buildManager;
 
@@ -22,12 +24,17 @@ public class Tile : MonoBehaviour {
         buildManager = BuildManager.instance;
     }
 
+    public Vector3 GetBuildPosition ()
+    {
+        return transform.position + positionOffset;
+    }
+
     void OnMouseEnter()
     {
         if (EventSystem.current.IsPointerOverGameObject())
             return;
 
-        if (buildManager.GetTurretToBuild() == null)
+        if (!buildManager.CanBuild)
             return;
 
         if (turret == null)
@@ -48,14 +55,17 @@ public class Tile : MonoBehaviour {
 
     void OnMouseDown()
     {
-        if (buildManager.GetTurretToBuild() == null)
+        if (!buildManager.CanBuild)
             return;
 
         if (turret == null)
         {
-            GameObject turretToBuild = buildManager.GetTurretToBuild();
-            turret = (GameObject)Instantiate(turretToBuild, transform.position + positionOffset, transform.rotation);
-            rend.material.color = unallowed;
+            int money = PlayerStats.money;
+            buildManager.BuildTurretOn(this);
+            if (money > PlayerStats.money)
+            {
+                rend.material.color = unallowed;
+            }
         }
     }
 }

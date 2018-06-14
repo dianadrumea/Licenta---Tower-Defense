@@ -3,6 +3,8 @@
 public class Shop : MonoBehaviour {
 
     BuildManager buildManager;
+    public TurretBlueprint turret;
+    public TurretBlueprint missileLauncher;
 
     void Start()
     {
@@ -11,11 +13,11 @@ public class Shop : MonoBehaviour {
 
     public void SelectedTurret()
     {
-        buildManager.SetTurretToBuild(buildManager.turretPrefab);
+        buildManager.SetTurretToBuild(turret);
     }
 
     public void SelectedMissileLauncher()
     {
-        buildManager.SetTurretToBuild(buildManager.missileLauncherPrefab);
+        buildManager.SetTurretToBuild(missileLauncher);
     }
 }
