@@ -2,9 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyMovement : MonoBehaviour {
+public class Enemy : MonoBehaviour {
 
     public float speed = 10f;
+    public int health = 100;
+    public int reward = 25;
+
+    public GameObject deathEffect;
 
     private Vector3 target;
     private int counter = 0;
@@ -12,6 +16,25 @@ public class EnemyMovement : MonoBehaviour {
     void Start()
     {
         target = PathGenerator.PathTiles[0];
+    }
+
+    public void TakeDamage(int amount)
+    {
+        health -= amount;
+
+        if (health <= 0)
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    { 
+        PlayerStats.money += reward;
+
+        GameObject effect = (GameObject)Instantiate(deathEffect, transform.position, Quaternion.identity);
+        Destroy(effect, 1f);
+        Destroy(gameObject);
     }
 
     void Update()
@@ -29,10 +52,16 @@ public class EnemyMovement : MonoBehaviour {
     {
         if (counter >= PathGenerator.PathTiles.Count - 1)
         {
-            Destroy(gameObject);
+            EndPath();
             return;
         }
         counter++;
         target = PathGenerator.PathTiles[counter];
+    }
+
+    void EndPath()
+    {
+        PlayerStats.Lives--;
+        Destroy(gameObject);
     }
 }

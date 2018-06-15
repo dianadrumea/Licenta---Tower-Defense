@@ -49,7 +49,9 @@
      <Compile Include="Assets\Scripts\BuildManager.cs" />
      <Compile Include="Assets\Scripts\Bullet.cs" />
      <Compile Include="Assets\Scripts\CameraController.cs" />
-     <Compile Include="Assets\Scripts\EnemyMovement.cs" />
+     <Compile Include="Assets\Scripts\Enemy.cs" />
+     <Compile Include="Assets\Scripts\GameManager.cs" />
+     <Compile Include="Assets\Scripts\Lives.cs" />
      <Compile Include="Assets\Scripts\Money.cs" />
      <Compile Include="Assets\Scripts\PathGenerator.cs" />
      <Compile Include="Assets\Scripts\PlayerStats.cs" />
