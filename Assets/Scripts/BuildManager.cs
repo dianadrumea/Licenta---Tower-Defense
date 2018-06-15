@@ -29,10 +29,10 @@ public class BuildManager : MonoBehaviour {
         PlayerStats.money -= turretToBuild.cost;
         //Debug.Log(" money left:" + PlayerStats.money);
 
-        GameObject turret = (GameObject) Instantiate(turretToBuild.prefab, tile.GetBuildPosition(), Quaternion.identity);
+        GameObject turret = (GameObject) Instantiate(turretToBuild.prefab, tile.GetBuildPosition() + turretToBuild.mapOffset, Quaternion.identity);
         tile.turret = turret;
 
-        GameObject effect = (GameObject)Instantiate(buildEffect, tile.GetBuildPosition(), Quaternion.identity);
+        GameObject effect = (GameObject)Instantiate(buildEffect, tile.GetBuildPosition() + turretToBuild.mapOffset, Quaternion.identity);
         Destroy(effect, 1f);
     }
 

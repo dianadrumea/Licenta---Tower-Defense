@@ -7,7 +7,6 @@ public class Tile : MonoBehaviour {
 
     public Color hoverColor;
     public Color unallowed;
-    public Vector3 positionOffset;
 
     [Header("Optional")]
     public GameObject turret;
@@ -26,7 +25,7 @@ public class Tile : MonoBehaviour {
 
     public Vector3 GetBuildPosition ()
     {
-        return transform.position + positionOffset;
+        return transform.position;
     }
 
     void OnMouseEnter()

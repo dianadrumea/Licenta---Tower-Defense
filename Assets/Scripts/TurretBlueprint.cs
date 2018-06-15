@@ -6,5 +6,6 @@ public class TurretBlueprint {
 
     public GameObject prefab;
     public int cost;
+    public Vector3 mapOffset;
 
 }
