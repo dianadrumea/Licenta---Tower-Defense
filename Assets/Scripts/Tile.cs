@@ -37,15 +37,14 @@ public class Tile : MonoBehaviour {
         if (!buildManager.CanBuild)
             return;
 
-        if (turret == null)
+        if (buildManager.HasMoney && turret == null)
         {
             rend.material.color = hoverColor;
         }
         else
         {
             rend.material.color = unallowed;
-        }
-        
+        }   
     }
 
     void OnMouseExit()
@@ -60,12 +59,11 @@ public class Tile : MonoBehaviour {
 
         if (turret == null)
         {
-            int money = PlayerStats.money;
             buildManager.BuildTurretOn(this);
-            if (money > PlayerStats.money)
+            if (!buildManager.HasMoney || turret != null)
             {
                 rend.material.color = unallowed;
             }
-        }
+        } 
     }
 }

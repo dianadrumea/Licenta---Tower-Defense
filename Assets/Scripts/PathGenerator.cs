@@ -54,7 +54,7 @@ public class PathGenerator : MonoBehaviour
         int column = random.Next(mapSize / 4, mapSize / 4 * 3);
 
         matrix[row, column] = 1;
-        spawnPoint = new Vector3(row, 0.7f, column);
+        spawnPoint = new Vector3(row, 0.6125f, column);
 
         while (row < mapSize - 2)
         {
@@ -70,7 +70,7 @@ public class PathGenerator : MonoBehaviour
             matrix[row, column] = 1;
             PathTiles.Add(new Vector3(row, 0.4f, column));
         }
-        destPoint = new Vector3(row, 0.7f, column);
+        destPoint = new Vector3(row, 0.6125f, column);
     }
 
     private void CreateNewFrontier(int row, int column)
