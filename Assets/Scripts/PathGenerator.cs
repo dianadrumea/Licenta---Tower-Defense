@@ -4,14 +4,18 @@ using UnityEngine;
 
 public class PathGenerator : MonoBehaviour
 {
+    [Header("Prefabs")]
     public GameObject Turret;
     public GameObject WhiteTile;
     public GameObject BlackTile;
     public GameObject SpawnPoint;
     public GameObject DestPoint;
-    public Transform parentObject;
-    public static List<Vector3> PathTiles;
 
+    [Header("Tiles parent")]
+    public Transform parentObject;
+    public string parentLayerName = "Environment";
+
+    public static List<Vector3> PathTiles;
     public static Vector3 spawnPoint;
     public static Vector3 destPoint;
     private int mapSize = 16;
@@ -34,15 +38,28 @@ public class PathGenerator : MonoBehaviour
             for (int j = 0; j < mapSize; j++)
             {
                 if (matrix[i, j] == 0)
-                    Instantiate(WhiteTile, new Vector3(i, 0, j), Quaternion.identity).transform.parent = parentObject;
+                {
+                    GameObject whiteTile = (GameObject)Instantiate(WhiteTile, new Vector3(i, 0, j), Quaternion.identity);
+                    whiteTile.transform.parent = parentObject;
+                    whiteTile.layer = LayerMask.NameToLayer(parentLayerName);
+                }
+                    
                 else
                 {
-                    Instantiate(BlackTile, new Vector3(i, 0, j), Quaternion.identity).transform.parent = parentObject;
+                    GameObject blackTile = (GameObject)Instantiate(BlackTile, new Vector3(i, 0, j), Quaternion.identity);
+                    blackTile.transform.parent = parentObject;
+                    blackTile.layer = LayerMask.NameToLayer(parentLayerName);
                 }
             }
         }
-        Instantiate(SpawnPoint, spawnPoint, Quaternion.identity).transform.parent = parentObject;
-        Instantiate(DestPoint, destPoint, Quaternion.identity).transform.parent = parentObject;
+
+        GameObject spawnPointGO = (GameObject)Instantiate(SpawnPoint, spawnPoint, Quaternion.identity);
+        spawnPointGO.transform.parent = parentObject;
+        spawnPointGO.layer = LayerMask.NameToLayer(parentLayerName);
+
+        GameObject destPointGO = (GameObject)Instantiate(DestPoint, destPoint, Quaternion.identity);
+        destPointGO.transform.parent = parentObject;
+        destPointGO.layer = LayerMask.NameToLayer(parentLayerName);
     }
 
     private void CreatePath()
